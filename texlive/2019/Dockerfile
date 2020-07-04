@@ -12,9 +12,11 @@ RUN apt-get update && \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-RUN curl -L ftp://tug.org/historic/systems/texlive/2019/install-tl-unx.tar.gz \
+RUN curl -L ftp://tug.org/historic/systems/texlive/2019/tlnet-final/install-tl-unx.tar.gz \
   | tar -zxv --strip-components=1 --directory=/tmp/texlive-install && \
-    /tmp/texlive-install/install-tl --profile=/tmp/texlive-install/texlive.profile && \
+    /tmp/texlive-install/install-tl \
+        --profile=/tmp/texlive-install/texlive.profile \
+        --repository "ftp://tug.org/historic/systems/texlive/2019/tlnet-final" && \
     rm -rf /tmp/texlive-install
 RUN tlmgr install \
         collection-langjapanese \
