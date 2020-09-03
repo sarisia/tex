@@ -1,0 +1,33 @@
+name: publish texlive images
+on:
+  push:
+    branches-ignore:
+      - '**'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [2019]
+    env:
+      REGISTRY: ghcr.io
+      PREFIX: ghcr.io/sarisia/
+      VARIANT: texlive
+    steps:
+      - uses: actions/checkout@v2
+      - name: build latest
+        run: docker build -t ${{ env.PREFIX }}${{ env.VARIANT }}:${{ matrix.version }} ./${{ env.VARIANT }}/${{ matrix.version }}
+      - name: build extra
+        run: docker build -t ${{ env.PREFIX }}${{ env.VARIANT }}:${{ matrix.version }}-extra ./${{ env.VARIANT }}/${{ matrix.version }}-extra
+      - name: prepare for publish
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login -u sarisia --password-stdin ${{ env.REGISTRY }}
+      - name: publish
+        run: |
+          docker push ${{ env.PREFIX }}${{ env.VARIANT }}:${{ matrix.version }}
+          docker push ${{ env.PREFIX }}${{ env.VARIANT }}:${{ matrix.version }}-extra
+      - uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
