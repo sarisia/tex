@@ -1,11 +1,20 @@
-# Tex
+# TeX
 
-[![](https://img.shields.io/static/v1?logo=docker&label=DockerHub&message=Images&color=0db7ed)](https://hub.docker.com/r/sarisia/texlive)
+Dockerfile for deploying LaTeX workspaces easily
 
-Dockerfile of my LaTeX workspace
+# Features
 
-## Build
+- [devcontainer](https://code.visualstudio.com/docs/remote/containers) support!
+  - Image based on `debian:buster`
+  - Non-root user `vscode`
+    - Learn more at [VSCode docs](https://code.visualstudio.com/docs/remote/containers-advanced#_adding-a-nonroot-user-to-your-dev-container)
+- Japanese support (prebuilt `collection-langjapanese`)
+- Extra image (TeXLive + `collection-latexextra`)
 
-```
-docker build texlive/2019
-```
+# Images
+
+- `ghcr.io/sarisia/texlive:2019`
+- `ghcr.io/sarisia/texlive:2019-extra`
+
+See [GitHub Container Registry](https://github.com/users/sarisia/packages/container/package/texlive) for more details.
+
