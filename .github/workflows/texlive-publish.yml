@@ -22,13 +22,13 @@ jobs:
 
       - name: build latest
         run: docker build -t ${{ env.PREFIX }}${{ env.VARIANT }}:${{ env.VERSION }} ./${{ env.VARIANT }}/${{ env.VERSION }}
-      - name: push ${{ env.VARIANT }}:${{ env.VERSION }}
+      - name: push texlive:2019
         if: ${{ github.ref }} == "refs/heads/master"
         run: docker push ${{ env.PREFIX }}${{ env.VARIANT }}:${{ env.VERSION }}
 
       - name: build extra
         run: docker build -t ${{ env.PREFIX }}${{ env.VARIANT }}:${{ env.VERSION }}-extra ./${{ env.VARIANT }}/${{ env.VERSION }}-extra
-      - name: push ${{ env.VARIANT }}:${{ env.VERSION }}-extra
+      - name: push texlive:2019-extra
         if: ${{ github.ref }} == "refs/heads/master"
         run: docker push ${{ env.PREFIX }}${{ env.VARIANT }}:${{ env.VERSION }}-extra
 

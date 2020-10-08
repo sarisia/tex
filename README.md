@@ -17,4 +17,3 @@ Dockerfile for deploying LaTeX workspaces easily
 - `ghcr.io/sarisia/texlive:2019-extra`
 
 See [GitHub Container Registry](https://github.com/users/sarisia/packages/container/package/texlive) for more details.
-
