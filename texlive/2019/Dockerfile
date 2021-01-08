@@ -20,8 +20,9 @@ RUN curl -L ftp://tug.org/historic/systems/texlive/${VARIANT}/tlnet-final/instal
     && /tmp/texlive-install/install-tl \
         --profile=/tmp/texlive-install/texlive.profile \
         --repository "ftp://tug.org/historic/systems/texlive/${VARIANT}/tlnet-final" \
-    && rm -rf /tmp/texlive-install
-ENV PATH="/usr/local/texlive/${VARIANT}/bin/x86_64-linux:${PATH}"
+    && rm -rf /tmp/texlive-install \
+    && /usr/local/texlive/${VARIANT}/bin/x86_64-linux/tlmgr path add
+# ENV PATH="/usr/local/texlive/${VARIANT}/bin/x86_64-linux:${PATH}"
 RUN tlmgr install \
         collection-langjapanese \
         collection-latexrecommended
